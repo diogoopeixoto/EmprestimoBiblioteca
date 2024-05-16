@@ -37,38 +37,28 @@ namespace GerenciadorDeBiblioteca.Api.Repository
 
         }
         public async Task<EmprestimoVO> Create(EmprestimoVO vo)
-        {
-            // Verifica se o livro está disponível
+        {            
             string idLivro = vo.IdLivro.ISBN;
             var livro = await _context.Livros.FirstOrDefaultAsync(l => l.ISBN == idLivro && l.Disponibilidade == DisponibilidadeLivro.Disponivel);
 
             if (livro == null)
-            {
-                // Livro não está disponível para empréstimo
+            {                
                 throw new InvalidOperationException("O livro não está disponível para empréstimo.");
             }
-
-            // Atualiza o status do livro para indisponível
-            var disponibilidade =livro.Disponibilidade = DisponibilidadeLivro.Indisponivel;
+                        
+            livro.Disponibilidade = DisponibilidadeLivro.Indisponivel;
             _context.Livros.Update(livro);
             _context.Livros.Add(livro);
-            // Atualiza o esta
-            // Define a data de empréstimo como a data atual
+            
             Emprestimo emprestimo = new Emprestimo
             {
                 IdUsuario = vo.IdUsuario,
                 IdLivro = vo.IdLivro,
                 DataDeEmprestimo = DateTime.Now
             };
-
-           
-            // Define o estado do objeto Livro como Detached
-            _context.Entry(livro).State = EntityState.Detached;
-
-            // Adiciona o empréstimo ao contexto
-            _context.Emprestimo.Add(emprestimo);
-
-            // Salva as alterações no banco de dados
+              
+            _context.Entry(livro).State = EntityState.Detached;                        
+            _context.Emprestimo.Add(emprestimo);                        
             await _context.SaveChangesAsync();
 
             return vo;

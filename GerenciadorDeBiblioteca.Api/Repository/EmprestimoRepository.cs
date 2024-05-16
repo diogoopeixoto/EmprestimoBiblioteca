@@ -38,26 +38,24 @@ namespace GerenciadorDeBiblioteca.Api.Repository
         }
         public async Task<EmprestimoVO> Create(EmprestimoVO vo)
         {            
-            string idLivro = vo.IdLivro.ISBN;
+            string idLivro = vo.IdLivro.ISBN;           
             var livro = await _context.Livros.FirstOrDefaultAsync(l => l.ISBN == idLivro && l.Disponibilidade == DisponibilidadeLivro.Disponivel);
-
+                      
             if (livro == null)
             {                
                 throw new InvalidOperationException("O livro não está disponível para empréstimo.");
             }
                         
             livro.Disponibilidade = DisponibilidadeLivro.Indisponivel;
-            _context.Livros.Update(livro);
-            _context.Livros.Add(livro);
+            _context.Livros.Update(livro);          
             
             Emprestimo emprestimo = new Emprestimo
             {
-                IdUsuario = vo.IdUsuario,
-                IdLivro = vo.IdLivro,
+                IdUsuario = vo.IdUsuario, 
+                IdLivroId = livro.Id, 
                 DataDeEmprestimo = DateTime.Now
             };
-              
-            _context.Entry(livro).State = EntityState.Detached;                        
+                                               
             _context.Emprestimo.Add(emprestimo);                        
             await _context.SaveChangesAsync();
 
@@ -69,8 +67,7 @@ namespace GerenciadorDeBiblioteca.Api.Repository
             var existingEmprestimo = await _context.Emprestimo.FirstOrDefaultAsync(e => e.Id == vo.Id);
             if (existingEmprestimo == null)
                 throw new InvalidOperationException("O empréstimo não foi encontrado.");
-
-            // Atualiza os dados do empréstimo
+                        
             existingEmprestimo.IdUsuario = vo.IdUsuario;
             existingEmprestimo.IdLivro = vo.IdLivro;
             existingEmprestimo.DataDeEmprestimo = vo.DataDeEmprestimo;

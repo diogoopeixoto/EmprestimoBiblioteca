@@ -30,7 +30,7 @@ namespace GerenciadorDeBiblioteca.Api.Controllers
 
         [HttpPost]
         public async Task<ActionResult<EmprestimoVO>> Create(EmprestimoVO vO)
-        {
+         {
             if (vO == null) return BadRequest();
             var emprestimo = await _emprestimoRepository.Create(vO);
 

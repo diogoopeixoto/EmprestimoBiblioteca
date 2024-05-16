@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "JIFbfZvGp7cgOrYyOKAykw8Tt2fhDEDS+cS1eeNkKUA=",
+  "Source": "GerenciadorDeBiblioteca.Api",
+  "BasePath": "_content/GerenciadorDeBiblioteca.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

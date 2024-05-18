@@ -5,7 +5,6 @@ using GerenciadorDeBiblioteca.Api.Interface;
 using GerenciadorDeBiblioteca.Api.Model;
 using GerenciadorDeBiblioteca.Api.Model.Enuns;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace GerenciadorDeBiblioteca.Api.Repository
 {
@@ -41,10 +40,8 @@ namespace GerenciadorDeBiblioteca.Api.Repository
             string idLivro = vo.IdLivro.ISBN;           
             var livro = await _context.Livros.FirstOrDefaultAsync(l => l.ISBN == idLivro && l.Disponibilidade == DisponibilidadeLivro.Disponivel);
                       
-            if (livro == null)
-            {                
-                throw new InvalidOperationException("O livro não está disponível para empréstimo.");
-            }
+            if (livro == null)                            
+                throw new InvalidOperationException("O livro não está disponível para empréstimo.");           
                         
             livro.Disponibilidade = DisponibilidadeLivro.Indisponivel;
             _context.Livros.Update(livro);          
@@ -64,13 +61,13 @@ namespace GerenciadorDeBiblioteca.Api.Repository
 
         public async Task<EmprestimoVO> Update(EmprestimoVO vo)
         {
-            var existingEmprestimo = await _context.Emprestimo.FirstOrDefaultAsync(e => e.Id == vo.Id);
-            if (existingEmprestimo == null)
+            var existeEmprestimo = await _context.Emprestimo.FirstOrDefaultAsync(e => e.Id == vo.Id);
+            if (existeEmprestimo == null)
                 throw new InvalidOperationException("O empréstimo não foi encontrado.");
                         
-            existingEmprestimo.IdUsuario = vo.IdUsuario;
-            existingEmprestimo.IdLivro = vo.IdLivro;
-            existingEmprestimo.DataDeEmprestimo = vo.DataDeEmprestimo;
+            existeEmprestimo.IdUsuario = vo.IdUsuario;
+            existeEmprestimo.IdLivro = vo.IdLivro;
+            existeEmprestimo.DataDeEmprestimo = vo.DataDeEmprestimo;
 
             await _context.SaveChangesAsync();
 

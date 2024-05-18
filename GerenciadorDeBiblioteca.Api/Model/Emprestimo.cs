@@ -1,5 +1,4 @@
-﻿using GerenciadorDeBiblioteca.Api.Model;
-using GerenciadorDeBiblioteca.Api.Model.Base;
+﻿using GerenciadorDeBiblioteca.Api.Model.Base;
 
 namespace GerenciadorDeBiblioteca.Api.Model
 {

@@ -1,5 +1,4 @@
 ﻿using GerenciadorDeBiblioteca.Api.Data.ValueObjects;
-using GerenciadorDeBiblioteca.Api.Model;
 
 namespace GerenciadorDeBiblioteca.Api.Interface
 {

@@ -1,5 +1,4 @@
 ﻿using GerenciadorDeBiblioteca.Api.Model.Enuns;
-using System.Security.Principal;
 
 namespace GerenciadorDeBiblioteca.Api.Data.ValueObjects
 {

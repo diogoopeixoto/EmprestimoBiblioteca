@@ -1,6 +1,5 @@
 ﻿using GerenciadorDeBiblioteca.Api.Data.ValueObjects;
 using GerenciadorDeBiblioteca.Api.Interface;
-using GerenciadorDeBiblioteca.Api.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GerenciadorDeBiblioteca.Api.Controllers
